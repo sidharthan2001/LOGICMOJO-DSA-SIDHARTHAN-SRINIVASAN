@@ -1,0 +1,27 @@
+27-JULY-2025
+
+1) TO FIND GCD OF TWO NUMBERS:
+=============================
+
+Using for loop;
+
+public class Main
+{
+	public static void main(String[] args) {
+	   int a = 1, b = 1;
+	   int mini = 0;
+	   if (a < b){
+	       mini = a;
+	   }
+	   else{
+	       mini = b;
+	   }
+	   int maxi = 0;
+	   for (int i = mini; i >= 1; i--){
+	       if(a%i == 0 && b%i ==0){
+	           maxi = Math.max(maxi,i);
+	       }
+	   }
+	   System.out.println(maxi);
+	}
+}
