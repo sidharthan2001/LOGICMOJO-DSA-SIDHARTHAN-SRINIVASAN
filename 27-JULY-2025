@@ -101,3 +101,45 @@ public class Main
 	    System.out.println(sum);
 	}
 }
+
+
+==============================================================================================================================================================================================================================
+
+
+3) LCM of an array of number:
+
+public class Main {
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 8, 3};
+        int max = numbers[0];
+        
+        for(int i = 1; i < numbers.length ; i++){
+            if (numbers[i] > max){
+                max = numbers[i];
+            }
+        }
+        
+        
+        
+        int lcm = max;
+        while(true){
+            boolean value = true;
+            for(int i = 0 ; i < numbers.length ; i++){
+                if (lcm%numbers[i] != 0){
+                    value = false;
+                    break;
+                }
+            } 
+                
+            if (value){
+                break;
+            }
+                
+            lcm++;
+            
+            
+        }
+        
+        System.out.println(lcm);
+    }
+}
