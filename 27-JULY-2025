@@ -80,3 +80,24 @@ public class Main
 	   System.out.println(result);
 	}
 }
+
+
+==============================================================================================================================================================================================================================
+
+2) Solve binary to deimal converter
+
+public class Main
+{
+	public static void main(String[] args) {
+		int sum = 0 ;
+		int number = 1001000;
+		int power = 0;
+		while (number!= 0){
+		    int rem = number%10;
+		    sum = sum + rem * (int)Math.pow(2,power);
+		    power = power + 1;
+		    number = number / 10;
+		}
+	    System.out.println(sum);
+	}
+}
