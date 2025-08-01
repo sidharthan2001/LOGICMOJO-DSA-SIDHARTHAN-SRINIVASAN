@@ -143,3 +143,34 @@ public class Main {
         System.out.println(lcm);
     }
 }
+
+OTHER WAYS USING EQUATION:   [LCM of two numbers = a*b/GCD(a,b)]
+##########################
+
+public class Main {
+    
+    public static int gcd(int a, int b) {
+        while(b == 0){
+            return a;
+        }
+        
+        return gcd(b,a%b);
+    }
+    
+   
+    public static int lcm(int a, int b) {
+        return (a * b) / gcd(a, b); 
+    }
+    
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 8, 3};  
+        int result = numbers[0];  
+        
+    
+        for (int i = 1; i < numbers.length; i++) {
+            result = lcm(result, numbers[i]);
+        }
+        
+        System.out.println(result); 
+    }
+}
