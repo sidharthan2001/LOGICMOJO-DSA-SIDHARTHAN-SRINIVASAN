@@ -174,3 +174,40 @@ public class Main {
         System.out.println(result); 
     }
 }
+
+
+=============================================================================================================================================================================================================================
+
+4) To find all prime numbers within N:
+   ###################################
+
+Naive Approach:
+===============
+
+public class Main
+{
+	public static void main(String[] args) {
+		int number = 50;
+		
+		for (int i = 2 ; i < number; i++){
+		    
+		    boolean isprime = true;
+		    
+		    for(int j = 2; j < i ; j++){
+		        if (i%j == 0){
+		            isprime = false;
+		            break;
+		        }
+		    }
+		    
+		    if (isprime){
+		        System.out.println(i);
+		    }
+		}
+	}
+}
+
+
+
+
+
