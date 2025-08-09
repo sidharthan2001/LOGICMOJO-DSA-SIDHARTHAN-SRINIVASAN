@@ -226,7 +226,7 @@ public class Main
 		
 		
 		
-		for(int i = 2; i*i <= n ; i++){
+		for(int i = 2; i*i <= n ; i++){            // we can either write the terminal condition as i < root(n)
 		    if (prime[i] == true){
 		        
 		        for(int j = i*i ; j<=n ;j = j + i){
