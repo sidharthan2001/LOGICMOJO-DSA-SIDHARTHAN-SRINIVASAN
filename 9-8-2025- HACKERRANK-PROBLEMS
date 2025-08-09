@@ -1,0 +1,239 @@
+QUESTIONS: https://www.hackerrank.com/contests/assignment-july-batch-25/submissions/all
+
+
+1) Maximizing XOR:
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+import java.lang.Math;
+
+class Result {
+
+    /*
+     * Complete the 'maximizingXor' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER l
+     *  2. INTEGER r
+     */
+
+    public static int maximizingXor(int l, int r) {
+    // Write your code here
+        int maximum = 0;
+        for (int i = l ; i <= r ; i++){
+            for (int j = l ; j <= r; j++ ){
+                int value = i^j;
+                
+                maximum = Math.max(maximum, value); 
+            }
+        }
+        
+        return maximum;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int l = Integer.parseInt(bufferedReader.readLine().trim());
+
+        int r = Integer.parseInt(bufferedReader.readLine().trim());
+
+        int result = Result.maximizingXor(l, r);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
+============================================================================================================================================================================================================================================================================
+
+
+2) Lonely Integer:
+
+
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+import java.util.Collections;
+
+class Result {
+
+    /*
+     * Complete the 'lonelyinteger' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts INTEGER_ARRAY a as parameter.
+     */
+
+    public static int lonelyinteger(List<Integer> a) {
+    // Write your code here
+        
+        for (int i = 0 ; i < a.size(); i++){
+            int count = Collections.frequency(a,a.get(i));
+            if (count == 1){
+                return a.get(i);
+            }
+        }
+        return -1;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        String[] aTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> a = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            int aItem = Integer.parseInt(aTemp[i]);
+            a.add(aItem);
+        }
+
+        int result = Result.lonelyinteger(a);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
+
+
+============================================================================================================================================================================================================================================================================
+
+
+3) Flipping bits
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'flippingBits' function below.
+     *
+     * The function is expected to return a LONG_INTEGER.
+     * The function accepts LONG_INTEGER n as parameter.
+     */
+
+    public static long flippingBits(long n) {
+    // Write your code here
+        long max32BitValue = (long) Math.pow(2, 32) - 1;
+        // Flipping bits means: change all 1's to 0's and all 0's to 1's
+        // If we subtract the number from the max value, we get the flipped version
+        long flipped = max32BitValue - n;
+
+        return flipped;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int q = Integer.parseInt(bufferedReader.readLine().trim());
+
+        for (int qItr = 0; qItr < q; qItr++) {
+            long n = Long.parseLong(bufferedReader.readLine().trim());
+
+            long result = Result.flippingBits(n);
+
+            bufferedWriter.write(String.valueOf(result));
+            bufferedWriter.newLine();
+        }
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
+
+
+========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+
+4) The Great XOR   [THIS ONE IS HALF RIGHT NEED TO DOUBLE CHECK ]
+
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'theGreatXor' function below.
+     *
+     * The function is expected to return a LONG_INTEGER.
+     * The function accepts LONG_INTEGER x as parameter.
+     */
+
+    public static long theGreatXor(long x) {
+    // Write your code here
+        int count = 0 ; 
+        for (long i = 1 ; i < x ; i++){
+            if ((x^i) > x){
+                count= count + 1;
+            }
+        }
+        return count;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int q = Integer.parseInt(bufferedReader.readLine().trim());
+
+        for (int qItr = 0; qItr < q; qItr++) {
+            long x = Long.parseLong(bufferedReader.readLine().trim());
+
+            long result = Result.theGreatXor(x);
+
+            bufferedWriter.write(String.valueOf(result));
+            bufferedWriter.newLine();
+        }
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
+
+
+============================================================================================================================================================================================================================================================================
