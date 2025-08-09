@@ -29,4 +29,38 @@ public class Main
 	}
 }
 
+================================================================================================================================================================================================================================
+2) Power of Two
+
+use this:
+=========
+
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+        if(n<=0){
+            return false;
+        }
+
+        while(n%2 == 0){
+            n=n/2;
+        }
+
+        return n==1;
+    }
+}
+
+			(OR)
+
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+        for(int i = 0 ; i <= n/2 ; i++ ){
+            int value = (int) Math.pow(2,i);
+            if(value == n){
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
 
