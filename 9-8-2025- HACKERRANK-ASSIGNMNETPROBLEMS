@@ -181,7 +181,7 @@ public class Solution {
 
 ========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
-4) The Great XOR   [THIS ONE IS HALF RIGHT NEED TO DOUBLE CHECK ]
+4) The Great XOR   
 
 
 import java.io.*;
@@ -203,13 +203,12 @@ class Result {
 
     public static long theGreatXor(long x) {
     // Write your code here
-        int count = 0 ; 
-        for (long i = 1 ; i < x ; i++){
-            if ((x^i) > x){
-                count= count + 1;
-            }
-        }
-        return count;
+        String value = Long.toBinaryString(x);
+        int length = value.length();
+        
+        long result = (long) Math.pow(2, length) - 1 - x ; // The catch ios for x = 10 , we can take 1010 where it has 4 digits thye maximum it can go to is 1111. 
+                                                           // If we take 2**4 - 1 it will give 15. Now subtract x from 15 to get the answer
+        return result;
     }
 
 }
@@ -234,6 +233,5 @@ public class Solution {
         bufferedWriter.close();
     }
 }
-
 
 ============================================================================================================================================================================================================================================================================
