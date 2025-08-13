@@ -96,3 +96,27 @@ class Solution {
     return val;
     }
 }
+
+                            (OR)
+
+class Solution {
+    public int findDuplicate(int[] nums) {
+        
+        Map<Integer, Integer> freq = new HashMap<Integer, Integer>();
+        int val = 0 ;
+        for (int i = 0; i < nums.length ; i++){
+            if(freq.containsKey(nums[i])){
+                freq.put(nums[i], freq.get(nums[i]) + 1 );
+                int count = freq.get(nums[i]);
+                if (count > 1){
+                    val = nums[i];
+                }
+            }
+            else{
+                freq.put(nums[i], 1);
+            }
+        }
+        
+    return val;
+    }
+}
