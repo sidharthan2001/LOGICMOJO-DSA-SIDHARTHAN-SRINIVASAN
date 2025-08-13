@@ -70,3 +70,29 @@ class Solution {
     return result;
     }
 }
+
+Find duplicate using hashmap:
+
+class Solution {
+    public int findDuplicate(int[] nums) {
+        
+        Map<Integer, Integer> freq = new HashMap<Integer, Integer>();
+
+        for (int i = 0; i < nums.length ; i++){
+            if(freq.containsKey(nums[i])){
+                freq.put(nums[i], nums[i] + 1 );
+            }
+            else{
+                freq.put(nums[i], 1);
+            }
+        }
+        int val = 0 ;
+        for (int num : nums){
+            int count = freq.get(num);
+            if (count > 1){
+                val= num;
+            }
+        }
+    return val;
+    }
+}
