@@ -48,5 +48,25 @@ class Solution {
         }
 
         return xor;
+
+    }
+}
+
+===============================================================================================================================================================================================================================================================================
+
+3) Duplicate numbers:
+
+class Solution {
+    public int findDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        int val = 0;
+        int result = 0;
+        for (int i =0 ; i<nums.length -1; i++){
+            val = nums[i] ^ nums[i + 1];
+            if (val == 0){
+                result = nums[i];
+            }
+        }
+    return result;
     }
 }
