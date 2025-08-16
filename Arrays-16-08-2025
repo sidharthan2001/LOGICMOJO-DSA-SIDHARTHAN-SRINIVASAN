@@ -24,3 +24,42 @@ class Solution {
     return -1;
     }
 }
+
+
+                      (OR)
+Boyer–Moore Majority Vote [Set vote to zero. vote for a new guy, if other guy comes in decrease the vote. If the guy keeps coming then keep voting for him]
+
+class Solution {
+    public int majorityElement(int[] nums) {
+       int votes = 0 , candidate = 0 ;
+
+       for(int i = 0 ; i <nums.length; i++){
+            if(votes == 0){
+                candidate = nums[i];
+                votes++;
+            }
+            else{
+                if(nums[i] == candidate){
+                    votes++;
+                }
+                else{
+                    votes--;
+                }
+            }
+       }
+    return candidate;
+    }
+}
+
+[add this if needed at end]
+
+votes = 0;
+        for(int i = 0 ; i < nums.length; i++){
+            if (nums[i] == candidate){
+                votes++;
+            }
+        }
+
+        if(votes > nums.length/2){
+            return candidate;
+        }
