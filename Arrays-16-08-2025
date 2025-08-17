@@ -147,3 +147,45 @@ class Solution {
        
     }
 }
+
+============================================================================================================================================================================================================================
+
+5) Two sum -Pairs with 0 Sum:
+
+import java.util.ArrayList;
+import java.util.*;
+class Solution {
+    public static ArrayList<ArrayList<Integer>> getPairs(int[] arr) {
+        // code here
+        Arrays.sort(arr);
+        HashSet<Integer> set = new HashSet<>();
+        
+        for(int i = 0 ; i<arr.length; i++){
+            set.add(arr[i]);
+        }
+        
+        ArrayList<Integer> newArr = new ArrayList<>(set);
+        Collections.sort(newArr);
+        int l = 0; 
+        int r = newArr.size()-1;
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        while(l < r){
+            if(newArr.get(l) + newArr.get(r) == 0){
+                ArrayList<Integer> pair = new ArrayList<>();
+                
+                pair.add(newArr.get(l));
+                pair.add(newArr.get(r));
+                res.add(pair);
+                l++;
+                r--;
+            }
+            else if(newArr.get(l) + newArr.get(r) > 0){
+                r--;
+            }
+            else{
+                l++;
+            }
+        }
+    return res;
+    }
+}
