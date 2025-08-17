@@ -189,3 +189,52 @@ class Solution {
     return res;
     }
 }
+
+
+============================================================================================================================================================================================================================
+
+6) TWO repeated elements:
+
+class Solution {
+    public int[] twoRepeated(int[] arr) {
+        // code here
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        for(int i = 0 ; i < arr.length; i++){
+            if(map.containsKey(arr[i])){
+                map.put(arr[i], i);
+            }
+            else{
+                map.put(arr[i], 1);
+            }
+        }
+        
+        
+        
+        int[] res = new int[2];
+        int index = 0;
+        for(int num : map.keySet()){
+            if(map.get(num) > 1){
+                int value = map.get(num);
+                res[index] = value;
+                index = index + 1;
+            }
+        }
+        
+        int minimum = Math.min(res[0], res[1]);
+        int maximum = Math.max(res[0], res[1]);
+        
+        for(int num : map.keySet()){
+            if(map.get(num) == minimum){
+                int value = num;
+                res[0] = value;
+            }
+            else if(map.get(num) == maximum){
+                int value = num;
+                res[1] = value;
+            }
+        }
+        
+    return res;
+    }
+}
