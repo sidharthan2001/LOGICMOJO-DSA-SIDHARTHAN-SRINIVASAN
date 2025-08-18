@@ -329,3 +329,82 @@ public class Solution {
         bufferedWriter.close();
     }
 }
+
+============================================================================================================================================================================================================================
+
+5) Largest sub array with sum equal to zero :
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'maxLen' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER n
+     *  2. INTEGER_ARRAY arr
+     */
+
+    public static int maxLen(int n, List<Integer> arr) {
+    // Write your code here
+        int sum = 0 ;
+        int maxlength = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i = 0 ; i < arr.size() ; i++){
+            
+            sum = sum + arr.get(i);
+            
+            
+            if(sum == 0){
+                maxlength = i + 1;
+            }
+            
+            
+            
+            if(map.containsKey(sum)){
+                int prev = map.get(sum);
+                int curr_sub_arr_length = i - prev;
+                maxlength = Math.max(curr_sub_arr_length, maxlength);
+            }
+            else{
+                map.put(sum, i);
+            }
+        }
+    return maxlength;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        String[] arrTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> arr = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            int arrItem = Integer.parseInt(arrTemp[i]);
+            arr.add(arrItem);
+        }
+
+        int result = Result.maxLen(n, arr);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
