@@ -408,3 +408,109 @@ public class Solution {
         bufferedWriter.close();
     }
 }
+
+
+
+============================================================================================================================================================================================================================
+
+
+6) Move Zeros problem:
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'move_func' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts following parameters:
+     *  1. INTEGER n
+     *  2. INTEGER_ARRAY arr
+     */
+
+    public static List<Integer> move_func(int n, List<Integer> arr) {
+    // Write your code here
+        int l = 0 ;
+        int r = arr.size() - 1;
+        int count0 = 0;
+        for(int i = 0 ; i < arr.size() ; i++){
+            if(arr.get(i) == 0){
+                count0 = count0 + 1;
+            }
+        }
+        if(count0 == arr.size()){
+            return arr;
+        }
+        while(l < r){
+            if(arr.get(l) != 0){
+                l++;
+            }
+            else if (arr.get(r) == 0) {
+                 r--; // skip trailing zeros
+            }
+            else{
+                int temp = arr.get(l);
+                arr.set(l , arr.get(r));
+                arr.set(r , temp);
+                
+                l++;
+                r--;
+            }
+        }
+        int count = 0;
+        for(int i = 0 ; i < arr.size() ; i++){
+            if (arr.get(i) == 0 ){
+                count = count + 1;
+            }
+        }
+        
+        int size = arr.size() - count;
+        
+       
+        Collections.sort(arr.subList(0 , size));
+       
+        
+        return arr;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        String[] arrTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> arr = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            int arrItem = Integer.parseInt(arrTemp[i]);
+            arr.add(arrItem);
+        }
+
+        List<Integer> result = Result.move_func(n, arr);
+
+        for (int i = 0; i < result.size(); i++) {
+            bufferedWriter.write(String.valueOf(result.get(i)));
+
+            if (i != result.size() - 1) {
+                bufferedWriter.write(" ");
+            }
+        }
+
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
