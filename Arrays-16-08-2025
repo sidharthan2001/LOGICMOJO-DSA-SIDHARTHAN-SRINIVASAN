@@ -304,3 +304,45 @@ class Solution {
     return res;
     }
 }
+
+============================================================================================================================================================================================================================
+
+8) Pair Sum Closest to 0
+
+
+// User function Template for Java
+
+class Solution {
+    public static int closestToZero(int arr[], int n) {
+        // your code here
+        Arrays.sort(arr);
+        
+        int l = 0; 
+        int r = arr.length - 1;
+        
+        
+        int res = 0;
+        int actualres = Integer.MAX_VALUE;
+        
+        while(l < r){
+            res = arr[l] + arr[r];
+           
+            if (Math.abs(res) < Math.abs(actualres) ) {
+                
+                    actualres = res;
+            }
+            // for tie breaker condition if two sums  [res, actualres] with its abs value is equal
+            // append the res value to actualres if the res is  bigger (i.e positive)
+            else if (((Math.abs(res) == Math.abs(actualres)) && (res > actualres))){  
+                actualres = res;
+            }
+            else if (res < 0){
+                l++;
+            }
+            else{
+                r--;
+            }
+        }
+    return actualres;
+    }
+}
