@@ -1,0 +1,138 @@
+QuickSort program with pivot as last element:
+
+import java.util.Arrays;
+public class Main
+{
+    public static void quicksort(int[] arr, int low, int high){
+        if(low >= high) return;
+        
+        int pivotpoint = partition(arr, low, high);
+        
+        quicksort(arr, low, pivotpoint - 1);
+        quicksort(arr, pivotpoint + 1, high);
+    }
+    
+    public static int partition(int[] arr, int low, int high){
+        int pivot = arr[high]; // keep pivot as last element
+        int i = low;      // to make sure the elements are sort and not confused always set the names of high and low to pivot and i
+        
+        for(int j = low; j < high ; j++){ // start from 0 to arr.length-1
+            if(arr[j] < pivot){
+                int temp = arr[i];
+                arr[i] = arr[j];        // if the curr number arr[j] is less than pivot (5) then swap with i to sort the array
+                arr[j] = temp;
+                i++;  // if swapped move i to next element
+            }
+        }
+        
+        
+        int temp = arr[i];  // swap at the outer loop to make sure the pivot value 5 is in correct place
+        arr[i] = arr[high];
+        arr[high] = temp;
+        
+        return i;
+        
+    }
+    
+	public static void main(String[] args) {
+		int[] arr = {3, 7, 2, 9, 1, 5};
+		System.out.println(Arrays.toString(arr));
+		quicksort(arr, 0 , arr.length - 1);
+		System.out.println(Arrays.toString(arr));
+	}
+}
+
+
+=============================================================================================================================================================================================================================================================================
+
+1) Merge Sort Problems : [But I have solved it with the Quicksort]
+
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'sort' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts following parameters:
+     *  1. INTEGER n
+     *  2. INTEGER_ARRAY arr
+     */
+    public static void quicksort(List<Integer> arr, int low, int high){
+        if(low >= high) return;
+        
+        int pivotpoint = partition(arr, low, high);
+        
+        quicksort(arr, low, pivotpoint - 1);
+        quicksort(arr, pivotpoint + 1, high);
+    }
+    
+    public static int partition(List<Integer> arr, int low, int high){
+        int pivot = arr.get(high);
+        int i = low;      
+        
+        for(int j = low; j < high ; j++){ 
+            if(arr.get(j) < pivot){
+                int temp = arr.get(i);
+                arr.set( i , arr.get(j));
+                arr.set( j , temp);
+                i++;  
+            }
+        }
+        
+        
+        int temp = arr.get(i);
+        arr.set( i , arr.get(high));
+        arr.set( high , temp);
+        return i;
+    }    
+    public static List<Integer> sort(int n, List<Integer> arr) {
+    // Write your code here 
+        quicksort(arr, 0 , arr.size() - 1);
+        
+        return arr;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        String[] arrTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> arr = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            int arrItem = Integer.parseInt(arrTemp[i]);
+            arr.add(arrItem);
+        }
+
+        List<Integer> result = Result.sort(n, arr);
+
+        for (int i = 0; i < result.size(); i++) {
+            bufferedWriter.write(String.valueOf(result.get(i)));
+
+            if (i != result.size() - 1) {
+                bufferedWriter.write(" ");
+            }
+        }
+
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
+
