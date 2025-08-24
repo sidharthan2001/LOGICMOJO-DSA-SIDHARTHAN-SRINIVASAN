@@ -152,6 +152,34 @@ class Solution {
 2) Rotate array :
 
 class Solution {
+    public static void reverse(int[] nums, int low, int right){
+        while(low < right){
+            int temp = nums[low];
+            nums[low] = nums[right];
+            nums[right] = temp;
+
+            low++;
+            right--;
+        }
+    }
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+
+        k = k % n;
+        int l = 0 ; 
+        int r = n - 1;
+        reverse(nums, l, r);
+
+        reverse(nums, l , k - 1);
+
+        reverse(nums, k , r);
+
+    }
+}
+
+                        (OR)
+
+class Solution {
     public void rotate(int[] nums, int k) {
         int n = nums.length;
 
