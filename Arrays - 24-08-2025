@@ -1,31 +1,51 @@
 1) TRIPLE SUM:
 
-Trivial Approach:
+Best solution:  [MY SOLUTION IS AT SECOND WHICH HAS BIT LESS PERFORMANCE]
 
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
         int sum = 0;
-        HashSet<List<Integer>> set = new HashSet<>();
-        for(int i = 0 ; i < nums.length; i++){
-            for(int j = i + 1 ; j < nums.length ; j++){
-                for(int k = j + 1 ; k < nums.length; k++){
-                    sum = nums[i] + nums[j] + nums[k];
+        List<List<Integer>> res =  new ArrayList<>();
+        for(int i = 0 ; i < nums.length - 2;  i++){ // take first element and go one by one
+                                                    // dont need to go to last because while i  = n - 2, l will be i + 1 
+                                                    // andr will be at n -1 
+            if(i > 0 && nums[i] == nums[i - 1]){
+                continue; // why i > 0 is because we cant find nums[i-1] which is nums[-1] 
+                          // this will remove duplicates while selection
+            }
+            int l = i + 1;
+            int r = nums.length - 1;
+            while(l < r){
+                sum = nums[i] + nums[l] + nums[r];
+                if (sum == 0){
+                    ArrayList<Integer> pair =  new ArrayList<>();
+                    pair.add(nums[i]);
+                    pair.add(nums[l]);
+                    pair.add(nums[r]);
 
-                    if(sum == 0 && i!=j && i!=k && j!=k){
-                       ArrayList<Integer> pair = new ArrayList<>();
-                       pair.add(nums[i]);  
-                       pair.add(nums[j]);
-                       pair.add(nums[k]);
-                       Collections.sort(pair);
-                       set.add(pair);
-                       
+                    res.add(pair);
+
+                    while(l < r && nums[l] == nums[l + 1]){
+                        l++;
                     }
 
-                    
+                    while(l < r && nums[r] == nums[r - 1]){
+                        r--;
+                    }
+
+                    l++;
+                    r--;
                 }
-            }
+                else if (sum < 0 ){
+                    l++;
+                }
+                else {
+                    r--;
+                }
+            }           
         }
-    return new ArrayList<>(set);
+    return res;
     }
 }
 
@@ -61,3 +81,35 @@ class Solution {
     return new ArrayList<>(set);
     }
 }
+
+                            (OR)
+
+Trivial Approach:
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        int sum = 0;
+        HashSet<List<Integer>> set = new HashSet<>();
+        for(int i = 0 ; i < nums.length; i++){
+            for(int j = i + 1 ; j < nums.length ; j++){
+                for(int k = j + 1 ; k < nums.length; k++){
+                    sum = nums[i] + nums[j] + nums[k];
+
+                    if(sum == 0 && i!=j && i!=k && j!=k){
+                       ArrayList<Integer> pair = new ArrayList<>();
+                       pair.add(nums[i]);  
+                       pair.add(nums[j]);
+                       pair.add(nums[k]);
+                       Collections.sort(pair);
+                       set.add(pair);
+                       
+                    }
+
+                    
+                }
+            }
+        }
+    return new ArrayList<>(set);
+    }
+}
+
