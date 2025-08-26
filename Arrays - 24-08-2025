@@ -350,7 +350,7 @@ class Solution {
 
 ===========================================================================================================================================================================================================================
 
-6) Subarray range with given sum
+6) Subarray range with given sum  // we can use sliding window but it wont work f the array elements are negative
 
 class Solution {
     static int subArraySum(int arr[], int tar) {
