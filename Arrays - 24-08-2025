@@ -350,7 +350,7 @@ class Solution {
 
 ===========================================================================================================================================================================================================================
 
-6) Subarray range with given sum  // we can use sliding window but it wont work f the array elements are negative
+6) Subarray range with given sum  // we can use sliding window but it wont work for the array elements are negative
 
 class Solution {
     static int subArraySum(int arr[], int tar) {
@@ -367,8 +367,8 @@ class Solution {
             }
 
             // case 2: check if there is a prefix sum that we can remove
-            if (map.containsKey(sum - tar)) {
-                count += map.get(sum - tar);
+            if (map.containsKey(sum - tar)) {              
+                count += map.get(sum - tar);            // the idea is so easy. If we subtract curr sum [sum] with target subarray we get the previous prefix sum.
             }
 
             // update frequency of current prefix sum
