@@ -368,7 +368,8 @@ class Solution {
 
             // case 2: check if there is a prefix sum that we can remove
             if (map.containsKey(sum - tar)) {              
-                count += map.get(sum - tar);            // the idea is so easy. If we subtract curr sum [sum] with target subarray we get the previous prefix sum.
+                count += map.get(sum - tar);            // the idea is so easy. If we subtract curr sum [sum] with target subarray we get the previous prefix sum. [prefix[i] - prefix[j] = tar]
+                                                        // prefix[j] = prefix[i] - tar 
             }
 
             // update frequency of current prefix sum
