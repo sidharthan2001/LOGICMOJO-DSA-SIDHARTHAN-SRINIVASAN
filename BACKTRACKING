@@ -1,0 +1,26 @@
+1) Generate all binary strings  [DO NOT ADD THERE ARE TWO '1's CONSECUTIVE FOR EXAMPLE DO NOT CONSIDER "011" OR "110"]
+   
+
+class Solution {
+    
+    static void generateAllBinaryStrings(int n, String s, List<String> result){
+        if(s.length() == n){
+            result.add(s);
+            return;
+        }
+        
+        generateAllBinaryStrings(n, s + "0", result);
+        if(s.isEmpty() || s.charAt(s.length() - 1) != '1'){     // add '1' only if the string s is empty or the previously added character is not '1'
+            generateAllBinaryStrings(n, s + "1", result);
+        }
+            
+    }
+    
+    public static List<String> generateBinaryStrings(int n) {
+        // code here
+        List<String> result = new ArrayList<>();
+        generateAllBinaryStrings(n ,"", result);
+        return result;
+    }
+}
+
