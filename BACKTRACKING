@@ -56,3 +56,26 @@ class Solution {
         return result;
     }
 }
+
+
+3) TOWER OF HANOI
+
+class Solution {
+    
+    static void savedHanoi(int n, int from, int to, int aux){
+        if(n == 1){
+            // System.out.println("move disk " + n + " from " + from + " to " + to);  // REMOVE THE COMMENTS TO PRINT ALL THE POSSIBLE STEPS FOR GIVEN N
+            return;
+        }
+        
+        savedHanoi(n - 1 , from, aux, to);
+        // System.out.println("move disk " + n + " from " + from + " to " + to); // REMOVE THE COMMENTS TO PRINT ALL THE POSSIBLE STEPS FOR GIVEN N
+        savedHanoi(n - 1 , aux, to, from);
+    }
+    
+    public int towerOfHanoi(int n, int from, int to, int aux) {
+        // code here
+        savedHanoi(n, from, to , aux);
+        return (int) (Math.pow(2, n) - 1);
+    }
+}
