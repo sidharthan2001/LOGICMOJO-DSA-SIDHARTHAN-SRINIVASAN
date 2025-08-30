@@ -81,3 +81,80 @@ class Solution {
         return (int) (Math.pow(2, n) - 1);
     }
 }
+
+
+4) Knight Tour :
+
+class Solution {
+
+    static int[] xMoves = {2,2,-2,-2,1,1,-1,-1};
+    static int[] yMoves = {1,-1,1,-1,2,-2,2,-2};
+    
+    public static boolean isSafe(int x, int y, int n, int[][] grid){
+        if(x >= 0 && y >= 0 && x < n && y < n && grid[x][y] == -1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    public static boolean traverse(int x, int y, int n, int move, int[][] grid){
+        int nextX = 0;
+        int nextY = 0;
+        
+        if(move == n*n){ // terminating condition for 5*5 if move is 25 then just stop
+            return true;
+        }
+        
+        for(int i = 0 ; i < 8 ; i++){ // knight can only go to 8 places from a position
+            nextX = x + xMoves[i]; // we need to start from position [0,0]
+            nextY = y + yMoves[i];
+            
+            if(isSafe(nextX, nextY, n, grid)){
+                grid[nextX][nextY] = move; // initialize the new position with moves
+                
+                if(traverse(nextX, nextY, n, move + 1,  grid)){ // check we can move forwared.
+                    return true;
+                }
+                else{
+                     grid[nextX][nextY] = -1;
+                }
+                
+            }
+        }
+        return false;
+    }
+    
+    public static boolean kinghtTour(int n){
+        int[][] grid = new int[n][n];
+        
+        for(int i = 0; i < n; i++){
+            for(int j = 0 ; j < n; j++){
+                grid[i][j] = -1;
+            }
+        }
+        
+        grid[0][0] = 0;
+        
+        if(traverse(0 ,0 ,n , 1, grid)){
+            //print all values
+            // for(int i = 0 ; i < n ; i++){
+            //     for(int j = 0; j < n; j++){
+            //         System.out.print(grid[i][j] + " ");
+            //     }
+            //     System.out.println();
+            // }
+            return true;            
+        }
+        else{
+            return false;
+        }
+    }
+
+    public boolean checkValidGrid(int[][] grid) {
+        int n = grid.length;
+        // System.out.println(kinghtTour(n));
+        return kinghtTour(n);
+    }
+}
