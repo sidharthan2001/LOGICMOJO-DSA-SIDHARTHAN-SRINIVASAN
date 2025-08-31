@@ -1,0 +1,63 @@
+Linked list operations
+
+*Insertion
+*Reverse
+*Deletion
+*Search
+*Traversal
+
+
+1) Traversal of linkedlist:
+
+class Main {
+    
+    public static class Node {
+        int data;
+        Node next = null;
+        
+        //empty constructor
+        Node(){
+            
+        }
+        
+        //Node with data alone
+        Node(int data){
+            this.data = data;
+        }
+        
+        //constructor with data and next reference
+        Node(int data, Node next){
+            this.data = data;
+            this.next = next;
+        }
+    }
+    
+    public static void iterativeTraverse(Node head){
+        Node curr = head;
+        
+        while(curr != null){
+            System.out.print(curr.data + "-->");
+            curr = curr.next;
+            
+        }
+    }
+    
+    public static void main(String[] args) {
+        Node head = null;
+        
+        Node node1 = new Node(5);
+        head = node1;
+        
+        Node node2 = new Node(4);
+        node1.next = node2;
+        
+        Node node3 = new Node(3);
+        node2.next = node3;
+        
+        Node node4 = new Node(11);
+        node3.next = node4;
+        
+        iterativeTraverse(node1);
+        
+    }
+}
