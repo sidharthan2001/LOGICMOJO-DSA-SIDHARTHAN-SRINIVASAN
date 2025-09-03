@@ -1,0 +1,51 @@
+1) Traverse Linked List:
+
+import java.util.*;
+
+// Class for Linked List
+class LinkedList {
+
+    // Node class
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    // Function to print elements of linked list
+    public static void printList(Node head) {
+        Node curr = head;
+        while (curr != null) {
+            System.out.println(curr.data);
+            curr = curr.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();  // number of elements in list
+        Node head = null, tail = null;
+
+        // Build linked list
+        for (int i = 0; i < n; i++) {
+            int val = sc.nextInt();
+            Node newNode = new Node(val);
+
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
+
+        // Print linked list
+        printList(head);
+    }
+}
