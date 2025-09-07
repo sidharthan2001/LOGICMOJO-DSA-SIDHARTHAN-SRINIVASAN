@@ -368,3 +368,35 @@ public class Solution {
     return null;
     }
 }
+
+==============================================================================================================================================================================================================================
+
+10) find the first node of loop in a linked list:
+
+class Solution {
+    public int cycleStart(Node head) {
+        // code here
+        Node slow = head;
+        Node fast = head;
+        Node pos = null;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast) {
+                pos = slow;
+                break;
+            }
+        }
+        
+        if(pos == null){
+            return -1;
+        }
+        
+        slow = head;
+        while(slow != pos){
+            slow = slow.next;
+            pos = pos.next;
+        }
+        return slow.data;
+    }
+}
