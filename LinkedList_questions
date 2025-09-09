@@ -460,3 +460,68 @@ class Solution {
         return new Node[] {curr1, curr2};
     }
 }
+
+==============================================================================================================================================================================================================================
+
+12) Merge two sorted linked list:
+
+
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+       
+
+        ListNode curr1 = list1;
+        ListNode curr2 = list2;
+
+       
+        ListNode newHead = null;
+        ListNode newTail = null;
+
+        while(curr1 != null && curr2 != null){
+            ListNode newNode ;
+            if(curr1.val <= curr2.val){
+                newNode = new ListNode(curr1.val);
+                curr1 = curr1.next;
+            }
+            else{
+                newNode = new ListNode(curr2.val);
+                curr2 = curr2.next;
+            }
+
+            if(newHead == null){
+                newHead = newNode;
+                newTail = newNode;
+            }
+            else{
+                newTail.next = newNode;
+                newTail = newNode;
+            }
+        }
+
+        // Fianlly add rest of the nodes to new linked list this also covers corner cases
+        while (curr1 != null) { 
+            ListNode newNode = new ListNode(curr1.val);
+            if (newHead == null) {   // important fix
+                newHead = newNode;
+                newTail = newNode;
+            } else {
+                newTail.next = newNode;
+                newTail = newNode;
+            }
+            curr1 = curr1.next;
+        }
+
+        while (curr2 != null) {
+            ListNode newNode = new ListNode(curr2.val);
+            if (newHead == null) {   // important fix
+                newHead = newNode;
+                newTail = newNode;
+            } else {
+                newTail.next = newNode;
+                newTail = newNode;
+            }
+            curr2 = curr2.next;
+        }
+        return newHead;
+    }
+}
