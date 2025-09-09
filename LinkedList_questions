@@ -400,3 +400,63 @@ class Solution {
         return slow.data;
     }
 }
+
+
+==============================================================================================================================================================================================================================
+
+
+11) split linkedlist alternatively:
+
+class Solution {
+    // Function to append a new node with newData at the end of a linked list
+    Node[] alternatingSplitList(Node head) {
+        // code here
+        if(head.next == null){
+            return new Node[] {null, null};
+        }
+        
+        
+        Node curr = head;
+        Node curr1 = null;
+        Node curr2 = null;
+        Node tail1 = null;
+        Node tail2 = null;
+        
+        int count = 0;
+        
+        
+      
+        while(curr != null){
+            
+            if(count % 2 == 0){
+                if(curr1 == null){
+                    curr1 = curr;
+                    tail1 = curr;
+                    
+                }
+                else{
+                    tail1.next = curr;
+                    tail1 = curr;
+                }
+            }
+            else{
+                 if(curr2 == null){
+                    curr2 = curr;
+                    tail2 = curr;
+                }
+                else{
+                    tail2.next = curr;
+                    tail2 = curr;
+                }
+            }
+            
+            curr = curr.next;
+            count = count + 1;
+        }
+        
+        if(tail1 != null) tail1.next = null;
+        if(tail2 != null) tail2.next = null;
+        
+        return new Node[] {curr1, curr2};
+    }
+}
