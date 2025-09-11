@@ -563,3 +563,38 @@ class Solution {
         return result.next;
     }
 }
+
+==============================================================================================================================================================================================================================
+
+
+14) rotate alinked list:
+
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head == null || head.next == null || k == 0) return head;
+        int size = 0;
+        ListNode curr = head;
+        ListNode tail = curr;
+        while(curr != null){
+            tail = curr;
+            curr = curr.next;
+            size = size + 1;
+        }
+
+        
+        tail.next = head; // make it circular
+
+        k = k % size;
+        int toBeRotated = size - k - 1;
+        ListNode newTail = head;
+        for(int i = 0; i < toBeRotated ; i++){
+            newTail = newTail.next; 
+       }
+
+        ListNode newHead = newTail.next;
+        newTail.next = null;
+
+        return newHead;
+    }
+
+}
