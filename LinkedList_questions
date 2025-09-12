@@ -633,7 +633,7 @@ class Solution {
         }
 
         if (nextNode != null) {
-            head.next = reverseKGroup(nextNode, k);
+            head.next = reverseKGroup(nextNode, k); // if the nextnode which is going to be starting of new group of k elements is not null then move head from starting node of LL to k .
         }   
 
         return prev;
