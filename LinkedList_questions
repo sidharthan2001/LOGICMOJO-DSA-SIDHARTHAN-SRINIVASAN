@@ -598,3 +598,45 @@ class Solution {
     }
 
 }
+
+==============================================================================================================================================================================================================================
+
+
+15) reverse nodes in k group : 
+
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+
+        if(head == null) return null;
+        ListNode curr = head;
+        int count = 0;
+
+        while(curr != null && count < k){
+            curr = curr.next;
+            count = count + 1;
+        }
+
+        if(count < k) return head; // this happens if there are lesser nodes than k
+
+        curr = head;
+        ListNode prev = null;
+        ListNode nextNode = null;
+        count = 0;
+
+        while(curr != null && count < k){
+            nextNode = curr.next;
+            curr.next = prev;
+
+            prev = curr;
+            curr = nextNode;
+            count = count + 1;
+        }
+
+        if (nextNode != null) {
+            head.next = reverseKGroup(nextNode, k);
+        }   
+
+        return prev;
+
+    }
+}
