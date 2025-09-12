@@ -640,3 +640,57 @@ class Solution {
 
     }
 }
+
+
+=============================================================================================================================================================================================================================
+
+
+16) reorder ll :  to print like [1,2,3,4,5] -> [1,5,2,4,3]
+
+
+public static SinglyLinkedListNode reverse(SinglyLinkedListNode head){
+        SinglyLinkedListNode prev = null;
+        SinglyLinkedListNode nextNode = null;
+        SinglyLinkedListNode curr = head;
+        
+        while(curr != null){
+            nextNode = curr.next;
+            curr.next  = prev;
+            
+            prev = curr;
+            curr = nextNode;
+        }
+        
+        return prev;
+    }
+    
+    
+    public static SinglyLinkedListNode rearrangeList(SinglyLinkedListNode head) {
+    // Write your code here
+        SinglyLinkedListNode slow = head;
+        SinglyLinkedListNode fast = head;
+        
+        while(fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast= fast.next.next;
+        }
+        
+        SinglyLinkedListNode second = reverse(slow.next);
+        slow.next = null;
+        
+        SinglyLinkedListNode first = head;
+        
+        while(second != null){
+            SinglyLinkedListNode temp1 = first.next;
+            SinglyLinkedListNode temp2 = second.next ;
+            
+            first.next = second;
+            second.next = temp1;
+            
+            first = temp1;
+            second = temp2;
+        }
+        return head;
+    }
+
+}
