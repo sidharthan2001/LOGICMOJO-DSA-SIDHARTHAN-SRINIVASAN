@@ -834,3 +834,116 @@ class Solution {
         return head1;
     }
 }
+
+
+19) FLATTEN SINLGY LINKEDLIST:
+
+
+class Solution {
+    
+    public static Node merge(Node l1,  Node l2){
+        Node dummy = new Node(0);
+        Node tail = dummy;
+        
+        while(l1 != null && l2 != null){
+            if(l1.data < l2.data){
+                tail.bottom = l1;
+                l1 = l1.bottom;
+                tail = tail.bottom;
+            }
+            else{
+                tail.bottom = l2;
+                l2 = l2.bottom;
+                tail = tail.bottom;
+            }
+        }
+        
+        if(l1 != null) tail.bottom = l1;
+        if(l2 != null) tail.bottom = l2;
+        
+        return dummy.bottom;
+        
+    }
+    
+    public static Node findmiddle(Node head){
+        Node slow = head;
+        Node fast = head;
+        
+        while(fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        
+        return slow;
+    }
+    
+    public static Node divide(Node head){
+        if (head == null || head.next == null) return head;
+        
+        Node middle = findmiddle(head);
+        Node second = middle.next;
+        
+        middle.next = null;
+        
+        Node firsthalf = divide(head);
+        Node secondhalf = divide(second);
+        
+        return merge(firsthalf, secondhalf);
+        
+    }
+    
+    public Node flatten(Node root) {
+        // code here
+        Node head = divide(root);
+        
+        return head;
+    }
+}
+
+
+                        (OR)
+
+class Solution {
+    
+    public static Node merge(Node l1,  Node l2){
+        Node dummy = new Node(0);
+        Node tail = dummy;
+        
+        while(l1 != null && l2 != null){
+            if(l1.data < l2.data){
+                tail.bottom = l1;
+                l1 = l1.bottom;
+                tail = tail.bottom;
+            }
+            else{
+                tail.bottom = l2;
+                l2 = l2.bottom;
+                tail = tail.bottom;
+            }
+        }
+        
+        if(l1 != null) tail.bottom = l1;
+        if(l2 != null) tail.bottom = l2;
+        
+        return dummy.bottom;
+        
+    }
+    
+   
+    
+    public Node flatten(Node root) {
+        // code here
+        if (root == null) return null;
+        
+        Node curr = root;
+        
+        while(curr.next != null){ // if curr.next is null we cant find the nextNode
+            Node nextNode = curr.next;
+            curr.next = nextNode.next;
+            curr = merge(curr, nextNode);
+            
+        }
+        
+        return curr;
+    }
+}
