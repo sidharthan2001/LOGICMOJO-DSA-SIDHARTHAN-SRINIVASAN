@@ -940,8 +940,12 @@ class Solution {
         while(curr.next != null){ // if curr.next is null we cant find the nextNode
             Node nextNode = curr.next;
             curr.next = nextNode.next;
-            curr = merge(curr, nextNode);
-            
+            curr = merge(curr, nextNode);    
+
+            // it wont change anything even if we change the code like changing ordereverything will be fine
+            // Node nextNode = curr.next;
+            // curr = merge(curr, nextNode);
+            // curr.next = nextNode.next;
         }
         
         return curr;
