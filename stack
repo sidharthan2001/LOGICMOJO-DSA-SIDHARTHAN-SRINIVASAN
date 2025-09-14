@@ -1,0 +1,75 @@
+1) Stack implementation using array:
+
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class Main {
+    static class Stackform {
+        public int maxsize;
+        public int[] stack;
+        public int top;
+        
+        public Stackform(int size){
+            maxsize = size;
+            stack = new int[maxsize];
+            top = -1; // initially stack is empty
+        }
+        
+        public void push(int value){
+            if (top == maxsize - 1) {
+                System.out.println("stack overflow!!!");
+            }    
+            else{
+                stack[++top] = value;
+                System.out.println(value);
+            }
+        }
+        
+        public int pop(){
+            if(top == -1){
+                System.out.println("stack is empty");
+                return -1;
+            }
+            else {
+                return stack[top--];
+            }
+        }
+        
+        public int peek(){
+            if(top == -1){
+                System.out.println("stack empty");
+                return -1;
+            }
+            else{
+                return stack[top];
+            }
+        }
+        
+        public  boolean isEmpty(){
+            if(top == -1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    }
+    
+    public static void main(String[] args) {
+        Stackform stack = new Stackform(6); // size of stack
+        
+        stack.push(5);
+        stack.push(10);
+        stack.push(20);
+        System.out.println(stack.peek());
+        
+        System.out.println(stack.pop());
+        System.out.println(stack.peek());
+        
+        System.out.println(stack.pop());
+        System.out.println(stack.peek());
+        
+        System.out.println(stack.pop());
+        System.out.println(stack.isEmpty());
+    }
+}
