@@ -104,3 +104,48 @@ class Solution {
         return stack.isEmpty();
     }
 }
+
+
+==============================================================================================================================================================================================================================
+
+4) min stack:
+
+import java.util.Stack;
+
+class MinStack {
+    private Stack<Integer> stack;
+    private Stack<Integer> minstack;
+
+    public MinStack() {
+        stack = new Stack<>();
+        minstack = new Stack<>();
+    }
+
+    public void push(int val) {
+        stack.push(val);
+        // If minstack is empty or val <= current minimum, push to minstack
+        if (minstack.isEmpty() || val <= minstack.peek()) {
+            minstack.push(val);
+        }
+    }
+
+    public void pop() {
+        // Pop from both stacks if the top values match
+        if (!stack.isEmpty()) {
+            int removed = stack.pop();
+            if (!minstack.isEmpty() && removed == minstack.peek()) {
+                minstack.pop();
+            }
+        }
+    }
+
+    public int top() {
+        // LeetCode guarantees this won't be called on an empty stack
+        return stack.peek();
+    }
+
+    public int getMin() {
+        // LeetCode guarantees this won't be called on an empty stack
+        return minstack.peek();
+    }
+}
