@@ -176,3 +176,37 @@ class Solution {
         return res;
     }
 }
+
+
+6) CELEBRITY PROBLEMS:
+
+class Solution {
+    public int celebrity(int mat[][]) {
+        // code here
+        Stack<Integer> stack = new Stack<>();
+        int n = mat.length - 1;
+        int celeb = -1;
+        
+        while(n >= 0){
+            stack.push(n);
+            n--;
+        }
+        
+        while(stack.size() > 1){
+            int first = stack.pop();
+            int second = stack.pop();
+            
+            if(mat[first][second] == 1) stack.push(second);
+            else stack.push(first);
+        }
+        
+        celeb = stack.peek();
+        
+        for(int i = 0; i < mat.length; i++){
+            if(celeb != i && mat[celeb][i] == 1) return -1;
+            if(celeb != i && mat[i][celeb] == 0) return -1;
+        }
+        
+        return celeb;
+    }
+}
