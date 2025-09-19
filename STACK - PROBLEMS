@@ -240,5 +240,35 @@ class Solution {
         }
         
         return candidate;
+
+
+
+    }
+}
+
+=============================================================================================================================================================================================================================
+
+7) Largest rectangle in histogram problem:
+
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        int res = 0;
+        int n = heights.length;
+
+        for(int i = 0; i < n; i++){
+            int curr = heights[i];
+
+            //check for height bar in left, take j and go to the left of i and it should stop at 0 and it height[j] >= height[i]
+            for(int j = i - 1 ; j >= 0 && heights[j] >= heights[i] ; j--){
+                curr = curr + heights[i];
+            }
+
+            for(int j = i + 1 ; j < n && heights[j] >= heights[i] ; j++){
+                curr = curr + heights[i];
+            }
+
+            res = Math.max(curr, res);
+        }
+        return res;
     }
 }
