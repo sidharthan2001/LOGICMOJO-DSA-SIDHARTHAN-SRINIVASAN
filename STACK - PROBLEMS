@@ -250,7 +250,9 @@ class Solution {
 
 7) Largest rectangle in histogram problem:
 
-class Solution {
+NAIVE APPOROACH:
+
+class Solution {             
     public int largestRectangleArea(int[] heights) {
         int res = 0;
         int n = heights.length;
@@ -272,6 +274,51 @@ class Solution {
         return res;
     }
 }
+
+                        (OR)
+
+BEST APPROACH:
+
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        int n = heights.length;
+        int maxArea = 0;
+        Stack<Integer> stack = new Stack<>();
+
+        // try to add the increasing order of indices in the stack
+        for (int i = 0; i <= n; i++) {
+            int curr_height;
+            if(i == n){
+                curr_height = 0;          
+            }
+            else{
+                curr_height = heights[i];
+            }
+
+            while(!stack.isEmpty() && curr_height < heights[stack.peek()]){
+                int index = stack.pop();
+                int height = heights[index];
+
+                int width;
+                if(stack.isEmpty()){
+                    width = i;
+                }
+                else{
+                    width = i - stack.peek() - 1;
+                }
+
+                int area = height * width;
+
+                maxArea = Math.max(area, maxArea);
+            }
+
+            stack.push(i);
+        }
+
+        return maxArea;
+    }
+}
+
 
                         (OR)
 
