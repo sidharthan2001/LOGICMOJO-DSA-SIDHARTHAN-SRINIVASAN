@@ -128,3 +128,35 @@ class MyQueue {
  * int param_3 = obj.peek();
  * boolean param_4 = obj.empty();
  */
+
+===================================================================================================================================================================================================================================================================================
+
+4) GAS STATIONS:
+
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int total =  0;
+        int curr = 0;
+        int station = 0;
+        int netGain = 0;
+
+        for(int i = 0; i < gas.length; i++){
+            netGain = gas[i] - cost[i];
+
+            total = total + netGain;
+            curr = curr + netGain;
+
+            if(curr < 0){
+                station = i+1; // if the curr status is negative move to next station
+                curr = 0; // start updating the curr again
+            }
+        }
+
+        if(total >= 0){ // the total should be greater or equal to zero
+            return station;
+        }
+        else{
+            return -1;
+        }
+    }
+}
