@@ -266,3 +266,44 @@ class LRUCache {
  * int param_1 = obj.get(key);
  * obj.put(key,value);
  */
+
+
+==============================================================================================================================================================================================================================
+
+6) Sliding window maximum
+
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        Deque<Integer> d = new ArrayDeque<>();
+        int i = 0;
+        int j = 0;
+        int n = nums.length;
+        int[] maximum_window = new int[n - k + 1];
+  
+        // find the first maximuym element and add it in the array for [0 ... k - 1]
+        while(i < k){   
+            while(!d.isEmpty() && nums[i] >= nums[d.getLast()]){
+                d.removeLast();
+            }
+            d.addLast(i);
+            i = i + 1;
+        }
+        maximum_window[j] = nums[d.getFirst()];
+        j = j + 1;
+
+        // add rest of he maximum elements from [i to n]
+
+        while( i < n ){
+            if(!d.isEmpty() && d.getFirst() <= i - k) d.removeFirst();   // remove elements in deque at first if it is out of window
+
+            while(!d.isEmpty() && nums[i] >= nums[d.getLast()]) d.removeLast();
+
+            d.addLast(i);
+            i = i + 1;
+            maximum_window[j] = nums[d.getFirst()];
+            j = j  + 1;
+        }
+
+        return maximum_window;
+    }
+}
