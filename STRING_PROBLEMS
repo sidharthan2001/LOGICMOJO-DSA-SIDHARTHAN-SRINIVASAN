@@ -1,0 +1,24 @@
+1) reverse words in a string:
+
+class Solution {
+    public String reverseWords(String s) {
+        String[] arr = s.trim().split("\\s+");
+
+        Stack<String> stack = new Stack<>();
+
+        for(int i  = 0 ; i < arr.length; i++){
+            stack.add(arr[i]);
+        } 
+
+        StringBuilder res = new StringBuilder();
+        while(!stack.isEmpty()){
+            String val = stack.pop();
+            res.append(val);
+            if(!stack.isEmpty()){
+                res.append(" ");
+            }
+        }
+
+        return res.toString();
+    }
+}
