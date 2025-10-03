@@ -107,3 +107,30 @@ class Solution {
         return true;
     }
 }
+
+============================================================================================================================================================================================================================================================================
+
+4) Minimum number of swaps:
+
+class Solution {
+    public int minSwaps(String s) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : s.toCharArray()) {
+            if (c == '[') {
+                stack.push(c);
+            } else {
+                if (!stack.isEmpty() && stack.peek() == '[') {
+                    stack.pop(); // valid match
+                } else {
+                    stack.push(c); // unmatched ]
+                }
+            }
+        }
+
+        // stack now contains unmatched brackets
+        // Every 2 unmatched brackets (one [ and one ]) require 1 swap
+        int unmatched = stack.size(); // should be even
+        return unmatched / 2;
+    }
+}
