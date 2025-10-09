@@ -234,6 +234,50 @@ class Solution {
 
                         (OR)
 
+
+class Solution {
+    public static boolean searchPattern(String txt, String pat) {
+        int n = txt.length();
+        int m = pat.length();
+
+        if (m == 0 || n < m) return false;
+
+        StringBuilder sb = new StringBuilder();
+
+        int l = 0;
+        int r = l + m;
+
+        while (r <= n) { // window should go until r == n
+            // clear and build the current window substring
+            sb.setLength(0);
+            for (int i = l; i < r; i++) {
+                sb.append(txt.charAt(i));
+            }
+
+            // compare with pattern
+            if (sb.toString().equals(pat)) {
+                return true;
+            }
+
+            // slide the window
+            l++;
+            r++;
+        }
+
+        return false;
+    }
+
+    // Example test
+    public static void main(String[] args) {
+        System.out.println(searchPattern("abcdefh", "bcd")); // true
+        System.out.println(searchPattern("axzy", "xy"));     // false
+    }
+}
+
+
+                            (OR)
+                    
+
 class Solution {
     public static boolean searchPattern(String txt, String pat) {
         // code here
