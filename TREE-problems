@@ -26,3 +26,71 @@ class Solution {
         return arr;
     }
 }
+
+==============================================================================================================================================================================================================================
+
+2) preorder traversal
+
+class Solution {
+    
+    public void traversal(Node curr, ArrayList<Integer> res){
+        
+        if (curr == null) return;
+        
+        res.add(curr.data);
+        traversal(curr.left, res);
+        traversal(curr.right, res);
+    }
+    
+    public ArrayList<Integer> preOrder(Node root) {
+        //  code here
+       ArrayList<Integer> res = new ArrayList<>();
+       traversal(root, res);
+       return res;
+    }
+}
+
+Inorder traversal:
+
+class Solution {
+    
+    public void traversal(Node curr, ArrayList<Integer> res){
+        
+        if (curr == null) return;
+        
+        
+        traversal(curr.left, res);
+        res.add(curr.data);
+        traversal(curr.right, res);
+    }
+    
+    public ArrayList<Integer> inOrder(Node root) {
+        // code here
+        ArrayList<Integer> res = new ArrayList<>();
+       traversal(root, res);
+       return res;
+    }
+}
+
+
+postOrder traversal:
+
+class Solution {
+    
+    public void traversal(Node curr, ArrayList<Integer> res){
+        
+        if (curr == null) return;
+        
+        
+        traversal(curr.left, res);
+        traversal(curr.right, res);
+        res.add(curr.data);
+    }
+    
+    public ArrayList<Integer> postOrder(Node root) {
+        // code here
+        ArrayList<Integer> res = new ArrayList<>();
+        traversal(root, res);
+        return res;
+    }
+}
