@@ -94,3 +94,91 @@ class Solution {
         return res;
     }
 }
+
+==============================================================================================================================================================================================================================
+
+3) Deletion of node in Binary Tree:
+
+/*
+Node class is as follows:
+
+class Node {
+    int data;
+    Node left, right;
+
+    public Node(int data){
+        this.data = data;
+    }
+}
+*/
+class Solution {
+    
+    public void deleteLast(Node root, Node delNode){
+        Queue<Node> q = new ArrayDeque<>();
+        
+        q.add(root);
+        
+        while(!q.isEmpty()){
+            Node temp = q.poll();
+            
+            if(temp == delNode){
+                temp = null;
+                return;
+            }
+            
+            if(temp.left != null){
+                if(temp.left == delNode){
+                    temp.left = null;
+                    return;
+                }
+                else{
+                    q.add(temp.left);
+                }
+            }
+            
+            if(temp.right != null){
+                if(temp.right == delNode){
+                    temp.right = null;
+                    return;
+                }
+                else{
+                    q.add(temp.right);
+                }
+            }
+        }
+        
+    }
+    
+    public Node deleteNode(Node root, int key) {
+        // code here
+        
+        if(root == null) return null;
+        
+        if(root.left == null && root.right == null) return root;
+        
+        Queue<Node> q = new ArrayDeque<>();
+        q.add(root);
+        
+        Node keyNode = null;
+        Node temp = null;
+        
+        while(!q.isEmpty()){
+            temp = q.poll();
+            
+            if(temp.data == key){
+                keyNode = temp;
+            }
+            
+            if(temp.left != null) q.add(temp.left);
+            if(temp.right != null) q.add(temp.right);
+        }
+        
+        if(keyNode != null){
+            int x = temp.data;
+            keyNode.data = x;
+            deleteLast(root, temp);
+        }
+        
+        return root;
+    }
+}
