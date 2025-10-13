@@ -221,7 +221,7 @@ class Solution {
 
 ===========================================================================================================================================================================================================================
 
-4) insertiuon in BST:
+4) insertion in BST:
 
 class Solution {
     public TreeNode insertIntoBST(TreeNode root, int val) {
@@ -233,5 +233,28 @@ class Solution {
         else curr.right = insertIntoBST(curr.right, val);
 
         return curr;
+    }
+}
+
+===========================================================================================================================================================================================================================
+
+5) Search in a BST:
+
+class Solution {
+    public boolean search(Node root, int key) {
+        // code here
+        if(root == null) return false;
+        
+        Node curr = root;
+        
+        while(curr != null){
+            if(curr.data == key) return true;
+            
+            else if (key < curr.data) curr = curr.left;
+            
+            else curr = curr.right;
+        }
+        
+        return false;
     }
 }
