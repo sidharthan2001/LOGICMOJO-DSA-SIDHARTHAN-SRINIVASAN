@@ -183,11 +183,11 @@ class Solution {
     }
 }
 
-For insertion logic:
+3) Insertion logic:
 
 
 class Solution {    
-    public Node deleteNode(Node root, int key) {
+    public Node InsertNode(Node root, int key) {
         // code here
         Node newNode = new Node(key);
         if(root == null) return null;
