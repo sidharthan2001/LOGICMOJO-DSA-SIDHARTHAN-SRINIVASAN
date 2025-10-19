@@ -616,3 +616,42 @@ class Solution {
         }
     }
 }
+
+==========================================================================================================================================================================================================================
+
+15) cousins of BT:
+
+class Solution {
+    public boolean isCousins(TreeNode root, int x, int y) {
+        if(root == null) return false;
+
+        Queue<TreeNode> q = new ArrayDeque<>();
+
+        q.add(root);
+
+        while(!q.isEmpty()){
+            int size = q.size();
+            boolean xfound = false;
+            boolean yfound = false;
+
+            for(int i = 0; i < size; i++){
+                TreeNode curr = q.poll();
+
+                if(curr.left != null && curr.right != null){
+                    if((curr.left.val == x && curr.right.val == y) || (curr.left.val  == y && curr.right.val == x)){
+                        return false;
+                    }
+                }
+
+                if(curr.val == x) xfound = true;
+                if(curr.val == y) yfound = true;
+
+                if(curr.left != null) q.add(curr.left);
+                if(curr.right != null) q.add(curr.right);
+            }
+            if (xfound && yfound) return true;
+            if (xfound || yfound) return false; 
+        }
+        return false;
+    }
+}
