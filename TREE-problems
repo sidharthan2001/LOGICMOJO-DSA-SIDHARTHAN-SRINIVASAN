@@ -699,3 +699,32 @@ class Solution {
         return q;
     }
 }
+
+==========================================================================================================================================================================================================================
+
+17) flattening the BT:
+
+class Solution {
+    public void flatten(TreeNode root) {
+        ArrayList<TreeNode> list = new ArrayList<>(); 
+        if(root == null) return;
+
+        preOrder(root, list);
+
+        for(int i = 0; i < list.size() - 1 ; i++){
+            TreeNode curr = list.get(i);
+            TreeNode next = list.get(i + 1);
+            curr.left = null;
+            curr.right = next;
+        }
+
+    }
+
+    public static void preOrder(TreeNode root, ArrayList<TreeNode> list){
+        if(root == null) return;
+
+        list.add(root);
+        preOrder(root.left, list);
+        preOrder(root.right, list);
+    }
+}
