@@ -728,3 +728,39 @@ class Solution {
         preOrder(root.right, list);
     }
 }
+
+==========================================================================================================================================================================================================================
+
+18) construct BT with inorder and postorder traversal output:
+
+class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if(inorder.length == 0 || postorder.length == 0){
+            return null;
+        }
+
+        int rootval = postorder[postorder.length - 1];
+        TreeNode root = new TreeNode(rootval);
+
+        int mid =0;
+
+        for(int i = 0; i < inorder.length; i++){
+            if(inorder[i] == rootval){
+                mid = i;
+            }
+        }
+        // separate the inorder array with mid
+        int[] leftinorder = Arrays.copyOfRange(inorder, 0, mid);
+        int[] rightinorder = Arrays.copyOfRange(inorder, mid + 1, inorder.length);
+
+        // separate postorder with leftinorder length
+
+        int[] leftpostorder = Arrays.copyOfRange(postorder, 0, leftinorder.length);
+        int[] rightpostorder = Arrays.copyOfRange(postorder, leftinorder.length, postorder.length - 1);
+
+        root.left = buildTree(leftinorder, leftpostorder);
+        root.right = buildTree(rightinorder, rightpostorder);
+
+        return root;
+    }
+}
