@@ -655,3 +655,47 @@ class Solution {
         return false;
     }
 }
+
+==========================================================================================================================================================================================================================
+
+16) lowest common ancester:
+
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null) return null;
+
+        HashMap<TreeNode, TreeNode> map = new HashMap<>();
+
+        Queue<TreeNode> queue = new LinkedList<>();
+
+        map.put(root, null);
+        queue.add(root);
+
+        while(!map.containsKey(p) || !map.containsKey(q)){
+            TreeNode curr = queue.poll();
+
+            if(curr.left != null){
+                map.put(curr.left, curr);
+                queue.add(curr.left);
+            }
+
+            if(curr.right != null){
+                map.put(curr.right, curr);
+                queue.add(curr.right);
+            }
+        }
+
+        HashSet<TreeNode> s = new HashSet<>();
+
+        while(p != null){
+            s.add(p);
+            p = map.get(p);
+        }
+
+        while(!s.contains(q)){
+            q = map.get(q);
+        }
+
+        return q;
+    }
+}
