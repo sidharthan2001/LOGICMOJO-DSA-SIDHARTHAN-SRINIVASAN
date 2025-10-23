@@ -764,3 +764,46 @@ class Solution {
         return root;
     }
 }
+
+==========================================================================================================================================================================================================================
+
+19) Binary Tree Maximum Path Sum:
+
+class Solution {
+    public int maxPathSum(TreeNode root) {
+        if(root == null) return 0;
+
+        int maxsum = Integer.MIN_VALUE;
+
+        HashMap<TreeNode,  Integer> gain = new HashMap<>();
+        Stack<Object[]> stack = new Stack<>();
+
+        stack.push(new Object[] {root, false});
+
+        while(!stack.isEmpty()){
+            Object[] top = stack.pop();
+            TreeNode node = (TreeNode) top[0];
+            boolean check = (boolean) top[1];
+            
+
+            if(node == null) continue;
+
+            if(check){
+                int left = Math.max(0, gain.getOrDefault(node.left,0));
+                int right = Math.max(0, gain.getOrDefault(node.right,0));
+
+                int pathsum = node.val + left + right;
+                maxsum = Math.max(maxsum, pathsum);
+
+                gain.put(node, node.val + Math.max(left, right));
+
+            }
+            else{
+                stack.add(new Object[] {node, true});
+                stack.add(new Object[] {node.right, false});
+                stack.add(new Object[] {node.left, false});
+            }
+        }
+        return maxsum;
+    }
+}
