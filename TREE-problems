@@ -807,3 +807,212 @@ class Solution {
         return maxsum;
     }
 }
+
+
+==========================================================================================================================================================================================================================
+
+
+20) vertical order traversal:
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    class Pair{
+        TreeNode node;
+        int col;
+
+        Pair(TreeNode node, int col){
+            this.node = node;
+            this.col = col;
+        }
+    }
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+
+        if (root == null) return res;
+
+        TreeMap<Integer, List<Integer>> map = new TreeMap<>();
+        Queue<Pair> q = new ArrayDeque<>();
+        q.add(new Pair(root, 0));
+
+        while (!q.isEmpty()) {
+            int size = q.size();
+            // temporary level map to hold values in this BFS level
+            Map<Integer, List<Integer>> levelMap = new HashMap<>();
+
+            for (int i = 0; i < size; i++) {
+                Pair top = q.poll();
+                TreeNode curr = top.node;
+                int col = top.col;
+
+                levelMap.putIfAbsent(col, new ArrayList<>());
+                levelMap.get(col).add(curr.val);
+
+                if (curr.left != null) q.add(new Pair(curr.left, col - 1));
+                if (curr.right != null) q.add(new Pair(curr.right, col + 1));
+            }
+
+            // Now sort each column's values for this level and merge into main map
+            for (int col : levelMap.keySet()) {
+                List<Integer> temp = levelMap.get(col);
+                Collections.sort(temp); // ensures same-row nodes are sorted by value
+                map.putIfAbsent(col, new ArrayList<>());
+                map.get(col).addAll(temp);
+            }
+        }
+
+        for (List<Integer> p : map.values()) {
+            res.add(p);
+        }
+
+        return res;   
+    }
+}
+
+
+==========================================================================================================================================================================================================================
+
+21) top view:
+
+
+/*
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int val) {
+        this.data = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+*/
+class Solution {
+    
+    class Pair{
+        Node node;
+        int height;
+        Pair(Node node, int height){
+            this.node = node;
+            this.height = height;
+        }
+    }
+    public ArrayList<Integer> topView(Node root) {
+        // code here
+        ArrayList<Integer> topview = new ArrayList<>();
+        
+        if(root == null) return new ArrayList<>();
+        //this map will store the height of first element in every column
+        Map<Integer, Integer> map = new TreeMap<>();
+        
+        Queue<Pair> q = new ArrayDeque<>();
+        q.add(new Pair(root, 0));
+        
+        while(!q.isEmpty()){
+            Pair top = q.poll();
+            Node curr = top.node;
+            int hd = top.height;
+            
+            
+            if(!map.containsKey(hd)){
+                map.put(hd, curr.data);
+            }
+            
+            if(curr.left != null){
+                q.add(new Pair(curr.left, hd - 1));
+            }
+            
+            if(curr.right != null){
+                q.add(new Pair(curr.right, hd + 1));
+            }
+            
+        }
+        
+        topview.addAll(map.values());
+        
+        return topview;
+    }
+}
+
+
+==========================================================================================================================================================================================================================
+
+
+22) Bottom view:
+
+/*
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}
+*/
+
+class Solution {
+    class Pair {
+        Node node;
+        int hd; // horizontal distance
+        
+        Pair(Node node, int hd) {
+            this.node = node;
+            this.hd = hd;
+        }
+    }
+    public ArrayList<Integer> bottomView(Node root) {
+        // code here
+        ArrayList<Integer> bottomViewList = new ArrayList<>();
+        
+        if (root == null) return bottomViewList;
+        
+        // TreeMap maintains sorted order of horizontal distances
+        Map<Integer, Integer> map = new TreeMap<>();
+        
+        Queue<Pair> queue = new ArrayDeque<>();
+        queue.add(new Pair(root, 0));
+        
+        while (!queue.isEmpty()) {
+            Pair current = queue.poll();
+            Node currentNode = current.node;
+            int hd = current.hd;
+            
+            // For bottom view, we always update (store the last seen node at that HD)
+            map.put(hd, currentNode.data);
+            
+            if (currentNode.left != null) {
+                queue.add(new Pair(currentNode.left, hd - 1));
+            }
+            
+            if (currentNode.right != null) {
+                queue.add(new Pair(currentNode.right, hd + 1));
+            }
+        }
+        
+        bottomViewList.addAll(map.values());
+        return bottomViewList;
+    }
+}
+
+
+==========================================================================================================================================================================================================================
+
+
+23) 
